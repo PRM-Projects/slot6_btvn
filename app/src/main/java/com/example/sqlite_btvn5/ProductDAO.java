@@ -12,6 +12,7 @@ public class ProductDAO {
     private  SqlLiteHelper dbHelper;
     private ProductDatabase db;
     private Context context;
+    private ProductRepo repo;
     public ProductDAO(Context context) {
         this.context = context;
         dbHelper = new SqlLiteHelper(context);
@@ -19,19 +20,25 @@ public class ProductDAO {
                 .allowMainThreadQueries()
                 .fallbackToDestructiveMigration()
                 .build();
+        repo = db.repo();
+    }
+
+    public Product getOne(int id){
+        return repo.getOne(id);
+    }
+    public void update(Product... products){
+        repo.updateAll(products);
     }
     public List<Product> listAll(){
-        ProductRepo repo = db.repo();
         return repo.getAll();
     }
 
-    public void deleteAll(Product[] products){
-        ProductRepo repo = db.repo();
+    public void delete(Product... products){
         repo.deleteAll(products);
     }
 
-    public void insert(Product[] products){
-        ProductRepo repo = db.repo();
+    public void insert(Product... products){
         repo.insertAll(products);
     }
+
 }

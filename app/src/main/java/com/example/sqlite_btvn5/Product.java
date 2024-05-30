@@ -7,9 +7,9 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "products")
 public class Product {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @NonNull
-    private String id;
+    private int id;
     @ColumnInfo(name = "name")
     private String name;
     @ColumnInfo(name = "price")
@@ -20,18 +20,18 @@ public class Product {
     public Product() {
     }
 
-    public Product(String id, String name, double price, int image) {
+    public Product(int id, String name, double price, int image) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.image = image;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
